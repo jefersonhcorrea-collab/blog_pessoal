@@ -2,7 +2,10 @@ import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPip
 import { Postagem } from "../entities/postagem.entity";
 import { PostagemService } from "../services/postagem.service";
 import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 
+@ApiTags("Postagem")
+@ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
 @Controller("/postagens")
 export class PostagemController {
@@ -43,8 +46,4 @@ export class PostagemController {
   delete(@Param('id', ParseIntPipe) id: number){
     return this.postagemService.delete(id);
   }
-
-  
-
-
 }
